@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090e1a">
+  <meta name="description" content="A private Quizlet-style study tool for the 30 supplied ITEC 3210 sample midterm questions.">
+  <title>ITEC 3210 Midterm Lab</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090e1a'/%3E%3Cpath d='M16 20h32M16 32h32M16 44h32M22 14v36M42 14v36' stroke='%23e31837' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='20' r='5' fill='%23f7f9ff'/%3E%3Ccircle cx='42' cy='32' r='5' fill='%23f7f9ff'/%3E%3Ccircle cx='22' cy='44' r='5' fill='%23f7f9ff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="ITEC 3210 study lab home">
+      <span class="brand-mark" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+      <span>
+        <strong>ITEC 3210</strong>
+        <small>Midterm Lab</small>
+      </span>
+    </a>
+    <div class="course-meta" aria-label="Course information">
+      <span>York University</span>
+      <span class="meta-divider" aria-hidden="true"></span>
+      <span>Andriy Pavlovych</span>
+    </div>
+    <button class="icon-button" id="resetButton" type="button" title="Reset all study progress" aria-label="Reset all study progress">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 1 1-2.3-5.7L20 7.6M20 3v4.6h-4.6"/></svg>
+    </button>
+  </header>
+
+  <main id="top" class="shell">
+    <section class="intro" aria-labelledby="pageTitle">
+      <div>
+        <p class="eyebrow">Applied Data Communications &amp; Networks · Fall 2026</p>
+        <h1 id="pageTitle">Know the network.<br><span>Own the midterm.</span></h1>
+        <p class="intro-copy">Thirty supplied sample questions, arranged in the same Week 1–5 sequence as the course syllabus.</p>
+      </div>
+      <div class="progress-card" aria-label="Study progress">
+        <div class="progress-ring" id="progressRing" style="--progress: 0">
+          <span id="masteryPercent">0%</span>
+        </div>
+        <div>
+          <p class="progress-label">Mastery</p>
+          <p><strong id="masteredCount">0</strong> of 30 marked known</p>
+          <div class="mini-bar"><span id="miniBar"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter-strip" aria-labelledby="chapterHeading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Syllabus sequence</p>
+          <h2 id="chapterHeading">Choose a chapter</h2>
+        </div>
+        <button class="text-button active" type="button" data-chapter="all">Study all 30</button>
+      </div>
+      <div class="chapter-grid" id="chapterGrid"></div>
+    </section>
+
+    <section class="study-panel" aria-labelledby="studyHeading">
+      <div class="study-toolbar">
+        <div>
+          <p class="eyebrow" id="activeChapterLabel">All chapters</p>
+          <h2 id="studyHeading">Study session</h2>
+        </div>
+        <div class="mode-tabs" role="tablist" aria-label="Study mode">
+          <button id="flashcardTab" class="mode-tab active" type="button" role="tab" aria-selected="true" aria-controls="flashcardView" data-mode="flashcards">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h7M7 13h10"/></svg>
+            Flashcards
+          </button>
+          <button id="testTab" class="mode-tab" type="button" role="tab" aria-selected="false" aria-controls="testView" data-mode="test">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11l2 2 4-5"/><rect x="4" y="3" width="16" height="18" rx="2"/></svg>
+            Practice test
+          </button>
+        </div>
+      </div>
+
+      <div id="flashcardView" role="tabpanel" aria-labelledby="flashcardTab">
+        <div class="card-status">
+          <span id="cardChapter">Week 1</span>
+          <span>Sample question <strong id="cardOriginalNumber">1</strong></span>
+          <span><strong id="cardPosition">1</strong> / <span id="cardTotal">30</span></span>
+        </div>
+
+        <button class="flashcard" id="flashcard" type="button" aria-label="Flip flashcard to reveal answer" aria-pressed="false">
+          <span class="flashcard-inner">
+            <span class="flashcard-face flashcard-front">
+              <span class="face-kicker">Question</span>
+              <span class="question-text" id="flashQuestion"></span>
+              <span class="flip-hint">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14.8-4.2M20 4v4h-4M20 12a8 8 0 0 1-14.8 4.2M4 20v-4h4"/></svg>
+                Click to reveal answer
+              </span>
+            </span>
+            <span class="flashcard-face flashcard-back">
+              <span class="face-kicker">Correct answer</span>
+              <span class="answer-letter" id="flashAnswerLetter">A</span>
+              <span class="answer-text" id="flashAnswer"></span>
+              <span class="explanation" id="flashExplanation"></span>
+              <span class="flip-hint">Click to see the question</span>
+            </span>
+          </span>
+        </button>
+
+        <div class="card-actions">
+          <button class="round-button" id="previousCard" type="button" aria-label="Previous flashcard">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="knowledge-button still-learning" id="learningButton" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            Still learning
+          </button>
+          <button class="knowledge-button know-it" id="knowButton" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg>
+            Know it
+          </button>
+          <button class="round-button" id="nextCard" type="button" aria-label="Next flashcard">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <p class="keyboard-hint"><kbd>Space</kbd> flip · <kbd>←</kbd><kbd>→</kbd> navigate · <kbd>1</kbd> learning · <kbd>2</kbd> know it</p>
+      </div>
+
+      <div id="testView" class="hidden" role="tabpanel" aria-labelledby="testTab">
+        <div id="testQuestionScreen">
+          <div class="test-progress-row">
+            <div>
+              <p class="eyebrow" id="testChapter">Week 1</p>
+              <p>Question <strong id="testPosition">1</strong> of <span id="testTotal">30</span></p>
+            </div>
+            <div class="score-chip"><strong id="liveScore">0</strong> correct</div>
+          </div>
+          <div class="test-progress"><span id="testProgressBar"></span></div>
+          <article class="test-card">
+            <p class="sample-number">Sample question <span id="testOriginalNumber">1</span></p>
+            <h3 id="testQuestion"></h3>
+            <div class="options-list" id="optionsList"></div>
+            <div class="feedback hidden" id="testFeedback" aria-live="polite">
+              <div class="feedback-title" id="feedbackTitle"></div>
+              <p id="feedbackExplanation"></p>
+            </div>
+            <button class="primary-button hidden" id="nextQuestion" type="button">Next question <span aria-hidden="true">→</span></button>
+          </article>
+        </div>
+
+        <div id="resultsScreen" class="results-screen hidden">
+          <div class="result-orbit" aria-hidden="true"><span></span></div>
+          <p class="eyebrow">Session complete</p>
+          <h3 id="resultHeadline">Strong work.</h3>
+          <p class="result-score"><strong id="finalScore">0</strong> / <span id="finalTotal">30</span></p>
+          <p id="resultMessage"></p>
+          <div class="result-actions">
+            <button class="primary-button" id="retryMissed" type="button">Retry missed</button>
+            <button class="secondary-button" id="restartTest" type="button">Restart test</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="question-map" aria-labelledby="mapHeading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Quick navigation</p>
+          <h2 id="mapHeading">Question map</h2>
+        </div>
+        <div class="legend"><span class="legend-dot known"></span> Known <span class="legend-dot learning"></span> Learning</div>
+      </div>
+      <div id="questionMap" class="question-map-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Personal study tool · ITEC 3210 · Fall 2026</p>
+    <p>Keep course materials private unless your instructor authorizes sharing.</p>
+  </footer>
+
+  <dialog id="resetDialog">
+    <div class="dialog-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M20 11a8.1 8.1 0 1 1-2.3-5.7L20 7.6M20 3v4.6h-4.6"/></svg>
+    </div>
+    <h2>Reset your progress?</h2>
+    <p>This clears every “know it” mark and restarts the practice test.</p>
+    <div class="dialog-actions">
+      <button class="secondary-button" id="cancelReset" type="button">Cancel</button>
+      <button class="danger-button" id="confirmReset" type="button">Reset everything</button>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
