@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090e1a">
-  <meta name="description" content="A private Quizlet-style study tool for the 30 supplied ITEC 3210 sample midterm questions.">
+  <meta name="description" content="A private Quizlet-style ITEC 3210 study tool with the original sample and two complete mock midterms.">
   <title>ITEC 3210 Midterm Lab</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090e1a'/%3E%3Cpath d='M16 20h32M16 32h32M16 44h32M22 14v36M42 14v36' stroke='%23e31837' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='20' r='5' fill='%23f7f9ff'/%3E%3Ccircle cx='42' cy='32' r='5' fill='%23f7f9ff'/%3E%3Ccircle cx='22' cy='44' r='5' fill='%23f7f9ff'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
@@ -38,7 +38,7 @@
       <div>
         <p class="eyebrow">Applied Data Communications &amp; Networks · Fall 2026</p>
         <h1 id="pageTitle">Know the network.<br><span>Own the midterm.</span></h1>
-        <p class="intro-copy">Thirty supplied sample questions, arranged in the same Week 1–5 sequence as the course syllabus.</p>
+        <p class="intro-copy">The original sample plus two complete 30-question practice sets, arranged in the same Week 1–5 sequence as the course syllabus.</p>
       </div>
       <div class="progress-card" aria-label="Study progress">
         <div class="progress-ring" id="progressRing" style="--progress: 0">
@@ -46,10 +46,20 @@
         </div>
         <div>
           <p class="progress-label">Mastery</p>
-          <p><strong id="masteredCount">0</strong> of 30 marked known</p>
+          <p><strong id="masteredCount">0</strong> of <span id="masteryTotal">30</span> marked known</p>
           <div class="mini-bar"><span id="miniBar"></span></div>
         </div>
       </div>
+    </section>
+
+    <section class="set-section" aria-labelledby="setHeading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Question bank</p>
+          <h2 id="setHeading">Choose a 30-question set</h2>
+        </div>
+      </div>
+      <div class="set-grid" id="setGrid"></div>
     </section>
 
     <section class="chapter-strip" aria-labelledby="chapterHeading">
@@ -84,7 +94,7 @@
       <div id="flashcardView" role="tabpanel" aria-labelledby="flashcardTab">
         <div class="card-status">
           <span id="cardChapter">Week 1</span>
-          <span>Sample question <strong id="cardOriginalNumber">1</strong></span>
+          <span>Question <strong id="cardOriginalNumber">1</strong></span>
           <span><strong id="cardPosition">1</strong> / <span id="cardTotal">30</span></span>
         </div>
 
@@ -138,7 +148,7 @@
           </div>
           <div class="test-progress"><span id="testProgressBar"></span></div>
           <article class="test-card">
-            <p class="sample-number">Sample question <span id="testOriginalNumber">1</span></p>
+            <p class="sample-number">Question <span id="testOriginalNumber">1</span></p>
             <h3 id="testQuestion"></h3>
             <div class="options-list" id="optionsList"></div>
             <div class="feedback hidden" id="testFeedback" aria-live="polite">
@@ -192,6 +202,7 @@
     </div>
   </dialog>
 
+  <script src="practice-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

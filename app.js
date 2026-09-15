@@ -6,7 +6,7 @@ const chapters = [
   { id: 5, week: "Week 5", title: "Wired & Wireless LANs", short: "LANs", color: "#ff6680" }
 ];
 
-const questions = [
+const sampleQuestions = [
   {
     id: 4, chapter: 1,
     question: "Which of the following is true regarding multi-layer model of communication?",
@@ -219,6 +219,33 @@ const questions = [
   }
 ];
 
+const questionSets = {
+  sample: {
+    label: "Original Sample",
+    description: "The 30 supplied midterm questions",
+    badge: "OS",
+    color: "#51d7ff",
+    questions: sampleQuestions
+  },
+  setA: {
+    label: "Practice Set A",
+    description: "Fresh questions at matching difficulty",
+    badge: "A",
+    color: "#9b8cff",
+    questions: window.practiceSets.setA
+  },
+  setB: {
+    label: "Practice Set B",
+    description: "A second full mock midterm",
+    badge: "B",
+    color: "#ff6680",
+    questions: window.practiceSets.setB
+  }
+};
+
+let selectedSet = "sample";
+let questions = questionSets[selectedSet].questions;
+
 const letters = ["A", "B", "C", "D", "E"];
 const storageKey = "itec3210-midterm-progress-v1";
 let savedProgress = loadProgress();
@@ -248,6 +275,10 @@ function saveProgress() {
   renderQuestionMap();
 }
 
+function displayNumber(item) {
+  return item.number ?? item.id;
+}
+
 function getChapter(id) {
   return chapters.find((chapter) => chapter.id === id);
 }
@@ -266,6 +297,38 @@ function setChapter(chapterId) {
   renderQuestionMap();
 }
 
+function setQuestionSet(setId) {
+  selectedSet = setId;
+  questions = questionSets[setId].questions;
+  selectedChapter = "all";
+  activeQuestions = [...questions];
+  cardIndex = 0;
+  document.querySelectorAll("[data-set]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.set === setId);
+  });
+  document.querySelectorAll("[data-chapter]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.chapter === "all");
+  });
+  byId("activeChapterLabel").textContent = `${questionSets[setId].label} · Weeks 1–5`;
+  resetTest(activeQuestions);
+  renderMastery();
+  renderFlashcard();
+  renderQuestionMap();
+}
+
+function renderSets() {
+  byId("setGrid").innerHTML = Object.entries(questionSets).map(([id, set]) => `
+    <button class="set-button ${id === selectedSet ? "active" : ""}" style="--set-color:${set.color}" type="button" data-set="${id}">
+      <span class="set-badge">${set.badge}</span>
+      <span class="set-copy"><strong>${set.label}</strong><span>${set.description}</span></span>
+      <span class="set-count">30 Q</span>
+    </button>
+  `).join("");
+  document.querySelectorAll("[data-set]").forEach((button) => {
+    button.addEventListener("click", () => setQuestionSet(button.dataset.set));
+  });
+}
+
 function renderChapters() {
   byId("chapterGrid").innerHTML = chapters.map((chapter) => {
     const count = questions.filter((question) => question.chapter === chapter.id).length;
@@ -282,9 +345,10 @@ function renderChapters() {
 }
 
 function renderMastery() {
-  const known = Object.values(savedProgress).filter((value) => value === "known").length;
+  const known = questions.filter((question) => savedProgress[question.id] === "known").length;
   const percent = Math.round((known / questions.length) * 100);
   byId("masteredCount").textContent = known;
+  byId("masteryTotal").textContent = questions.length;
   byId("masteryPercent").textContent = `${percent}%`;
   byId("progressRing").style.setProperty("--progress", percent);
   byId("miniBar").style.width = `${percent}%`;
@@ -296,7 +360,7 @@ function renderFlashcard() {
   byId("flashcard").classList.remove("flipped");
   byId("flashcard").setAttribute("aria-pressed", "false");
   byId("cardChapter").textContent = `${chapter.week} · ${chapter.short}`;
-  byId("cardOriginalNumber").textContent = item.id;
+  byId("cardOriginalNumber").textContent = displayNumber(item);
   byId("cardPosition").textContent = cardIndex + 1;
   byId("cardTotal").textContent = activeQuestions.length;
   byId("flashQuestion").textContent = item.question;
@@ -327,7 +391,7 @@ function renderQuestionMap() {
   const visible = selectedChapter === "all" ? questions : activeQuestions;
   byId("questionMap").innerHTML = visible.map((item, index) => {
     const state = savedProgress[item.id] || "";
-    return `<button type="button" class="map-button ${state}" data-map-index="${index}" aria-label="Go to sample question ${item.id}">${item.id}</button>`;
+    return `<button type="button" class="map-button ${state}" data-map-index="${index}" aria-label="Go to question ${displayNumber(item)}">${displayNumber(item)}</button>`;
   }).join("");
   document.querySelectorAll("[data-map-index]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -370,7 +434,7 @@ function renderTestQuestion() {
   byId("testChapter").textContent = `${chapter.week} · ${chapter.short}`;
   byId("testPosition").textContent = testIndex + 1;
   byId("testTotal").textContent = testQuestions.length;
-  byId("testOriginalNumber").textContent = item.id;
+  byId("testOriginalNumber").textContent = displayNumber(item);
   byId("testQuestion").textContent = item.question;
   byId("testProgressBar").style.width = `${(testIndex / testQuestions.length) * 100}%`;
   byId("testFeedback").classList.add("hidden");
@@ -484,6 +548,7 @@ function wireEvents() {
   });
 }
 
+renderSets();
 renderChapters();
 renderMastery();
 renderQuestionMap();

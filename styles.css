@@ -185,11 +185,35 @@ h1 span { color: var(--red-bright); }
 .mini-bar { width: 160px; max-width: 100%; height: 5px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,0.08); }
 .mini-bar span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--red), var(--red-bright)); transition: width 300ms ease; }
 
+.set-section { padding: 10px 0 20px; }
 .chapter-strip, .question-map { padding: 28px 0 44px; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 18px; }
 .section-heading h2, .study-toolbar h2 { font-size: 1.7rem; letter-spacing: -0.025em; margin-bottom: 0; }
 .text-button { color: var(--muted); border: 0; background: transparent; cursor: pointer; padding: 8px 0; font-weight: 750; }
 .text-button.active, .text-button:hover { color: var(--text); }
+
+.set-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.set-button {
+  color: var(--text);
+  text-align: left;
+  background: rgba(17, 25, 43, 0.72);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  align-items: center;
+  gap: 13px;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+.set-button:hover { transform: translateY(-2px); background: rgba(23, 34, 57, 0.9); }
+.set-button.active { border-color: var(--set-color); box-shadow: inset 0 0 0 1px var(--set-color); }
+.set-badge { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: color-mix(in srgb, var(--set-color) 14%, transparent); color: var(--set-color); font-weight: 900; }
+.set-copy strong, .set-copy span { display: block; }
+.set-copy strong { font-size: 0.93rem; margin-bottom: 4px; }
+.set-copy span { color: var(--muted); font-size: 0.74rem; line-height: 1.35; }
+.set-count { color: var(--muted); font-size: 0.72rem; font-weight: 800; }
 
 .chapter-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
 .chapter-button {
@@ -346,6 +370,7 @@ dialog p { color: var(--muted); line-height: 1.6; }
   .intro { grid-template-columns: 1fr; padding-top: 54px; }
   .progress-card { max-width: 420px; }
   .chapter-grid { grid-template-columns: repeat(3, 1fr); }
+  .set-grid { grid-template-columns: 1fr; }
   .question-map-grid { grid-template-columns: repeat(10, 1fr); }
 }
 
