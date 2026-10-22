@@ -447,3 +447,16 @@ details p { color: var(--muted); line-height: 1.75; margin-top: 16px; overflow-w
 @media (max-width:650px) { .textbook-grid { grid-template-columns:1fr; } .library-tab { padding:13px 6px; font-size:.88rem; } .library-tab span { display:block; margin:5px 0 0; } .textbook-actions>* { flex:1 1 42%; } }
 @media (max-width: 900px) { .chapter-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 650px) { .test-settings label { flex-direction: column; align-items: flex-start; } .set-grid { grid-template-columns: 1fr; } .flash-options { font-size: .88rem; } }
+
+/* Guide quizzes share the existing library layout and keep sessions separate. */
+.sg-page-link, #sgReview a { color:var(--cyan); font-size:.9rem; line-height:1.7; }
+#sgOptions { margin-top:22px; }
+.sg-nav, .sg-start-actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.sg-nav { margin:24px 0; }
+.sg-nav .primary-button { margin-top:0; }
+#sgMap .map-button[aria-current=true] { outline:2px solid var(--cyan); outline-offset:3px; }
+#sgMap .sg-answered { background:rgba(81,215,255,.15); color:var(--cyan); border-color:var(--cyan); }
+#sgResults:focus { outline:none; }
+button:disabled { cursor:default; }
+.sg-nav button:disabled, #sgRetry:disabled { opacity:.45; }
+@media(max-width:650px) { .library-tabs { gap:3px; padding:4px; } .library-tab { font-size:.78rem; } .sg-nav>* { flex:1 1 45%; } .sg-start-actions { width:100%; } .sg-start-actions>* { flex:1; } }

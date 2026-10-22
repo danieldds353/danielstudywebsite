@@ -20,12 +20,12 @@ function tbSave() {
   catch { tbId('tbDraftStatus').textContent='This browser could not save progress. Keep a separate copy of your answer.'; }
 }
 function setLibraryTab(tab) {
-  if(!['practice','textbook'].includes(tab)) return;
+  if(!['practice','textbook','guide'].includes(tab)) return;
   libraryTab=tab;
-  const textbook=tab==='textbook';
-  tbId('practiceLibrary').classList.toggle('hidden',textbook);
-  tbId('textbookLibrary').classList.toggle('hidden',!textbook);
-  tbId('practiceProgressCard').classList.toggle('hidden',textbook);
+  tbId('practiceLibrary').classList.toggle('hidden',tab!=='practice');
+  tbId('textbookLibrary').classList.toggle('hidden',tab!=='textbook');
+  tbId('guideLibrary').classList.toggle('hidden',tab!=='guide');
+  tbId('practiceProgressCard').classList.toggle('hidden',tab!=='practice');
   document.querySelectorAll('[data-library]').forEach(button=>{
     const active=button.dataset.library===tab;
     button.classList.toggle('active',active);

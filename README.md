@@ -1,6 +1,6 @@
 # ITEC 3210 Midterm Lab — Lecture Revision
 
-The original Quizlet-style design, updated for the uploaded slides from Andriy Pavlovych's ITEC 3210 course. Includes 180 multiple-choice questions: the original 30, three 30-question mock sets (A/B/C), and 60 lecture drills. Also includes eight written prompts and a 20-page PDF study guide.
+The original Quizlet-style design, updated for the uploaded slides from Andriy Pavlovych's ITEC 3210 course. Includes 180 multiple-choice questions: the original 30, three 30-question mock sets (A/B/C), and 60 lecture drills. Also includes eight written prompts, a 20-page PDF study guide, 174 textbook review prompts, and 120 original Study Guide Quiz questions.
 
 ## Open locally
 
@@ -8,7 +8,7 @@ Extract the ZIP first, then open `index.html`. No installation, account, build o
 
 ## Put it on GitHub
 
-To update your existing site, upload `index.html`, `styles.css`, `practice-data.js`, `practice-c.js`, `textbook-data.js`, `textbook.js`, `app.js`, `QUESTION-SOURCES.md`, `ITEC3210-Midterm-Study-Guide.pdf` and `README.md` to the same folder as the existing `index.html`, replacing matching files. Commit, allow the existing deployment to finish, then refresh. Keep the files together. No existing hosting configuration change is needed.
+To update your existing site, upload `index.html`, `styles.css`, `practice-data.js`, `practice-c.js`, `textbook-data.js`, `textbook.js`, `study-guide-data.js`, `study-guide-quiz.js`, `app.js`, `QUESTION-SOURCES.md`, `ITEC3210-Midterm-Study-Guide.pdf` and `README.md` to the same folder as the existing `index.html`, replacing matching files. Commit, allow the existing deployment to finish, then refresh. Keep the files together. No existing hosting configuration change is needed.
 
 For a new repository, upload the same files to its root. GitHub Pages uses Settings → Pages → Deploy from a branch → main → / (root).
 
@@ -59,4 +59,15 @@ Prompts retain the original wording and numbers, with extracted line breaks norm
 
 Textbook answers can be drafted in a textarea and are saved locally in the browser alongside separate self-check marks. No server receives drafts. Chapter selection, shuffle, question navigation and reveal/hide controls are included. Practice progress and textbook progress are independent; the header reset affects practice sets only.
 
-For this update upload all ten files from the ZIP, including the new `textbook-data.js` and `textbook.js`. Existing A/B/C sets, lecture drills, original sample and the PDF guide remain included. Syntax and functional checks cover both question libraries; browser QA verifies the new tab and draft/reveal/navigation flow.
+The textbook update introduced `textbook-data.js` and `textbook.js`. Upload all twelve files from the latest ZIP, including the two Study Guide Quiz scripts. Existing A/B/C sets, lecture drills, original sample and the PDF guide remain included. Syntax and functional checks cover both question libraries; browser QA verifies the new tab and draft/reveal/navigation flow.
+
+
+## Study Guide Quiz tab
+
+120 new original multiple-choice questions: 20 per guide unit, in the same chronological order as the PDF. Units map to textbook Chapters 1, 2, 3, 4, 5 and 7. Each question includes five choices, an explanation, and a direct link to the relevant PDF page. Concept distinctions, application scenarios and worked-method numerical questions reflect the guide rather than adding topics from excluded textbook sections.
+
+Choose immediate feedback or feedback at the end. Answers lock after selection; use the question map to reach unanswered questions, then finish for a score and complete answer review. Retry missed questions, shuffle or restart a unit. Each unit’s current attempt and best full-unit score are saved separately in the browser; retries do not replace full-unit bests. The practice reset does not clear guide sessions or textbook drafts. Local-file browser storage support varies; GitHub Pages provides a consistent site origin.
+
+To update GitHub, extract the ZIP and upload **all twelve files** into the existing site folder, replacing matching files. In particular, include `study-guide-data.js` and `study-guide-quiz.js` alongside the revised HTML, CSS and textbook tab script. Existing question sets and the PDF remain included. No build step is required.
+
+Verification for this addition: checks cover all 120 items, unique options/IDs, 20 per unit, balanced answer positions, chapter mapping, independent arithmetic, three-tab navigation, locked answers, study/exam feedback, completion validation, scoring, retry, shuffle, saved sessions and isolated progress. Existing practice and textbook checks continue to pass.

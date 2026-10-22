@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090e1a">
-  <meta name="description" content="ITEC 3210 lecture-focused study: 180 questions including Practice Set C and a printable midterm guide.">
+  <meta name="description" content="ITEC 3210 study: lecture practice, textbook review, and 120 Study Guide Quiz questions with guide-page explanations.">
   <title>ITEC 3210 Midterm Lab</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090e1a'/%3E%3Cpath d='M16 20h32M16 32h32M16 44h32M22 14v36M42 14v36' stroke='%23e31837' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='20' r='5' fill='%23f7f9ff'/%3E%3Ccircle cx='42' cy='32' r='5' fill='%23f7f9ff'/%3E%3Ccircle cx='22' cy='44' r='5' fill='%23f7f9ff'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
@@ -38,7 +38,7 @@
       <div>
         <p class="eyebrow">Applied Data Communications &amp; Networks · Fall 2026</p>
         <h1 id="pageTitle">Know the network.<br><span>Own the midterm.</span></h1>
-        <p class="intro-copy">Study 180 lecture-based practice questions, or open Textbook Questions for all 174 end-of-chapter review prompts across six chapters. Use the printable guide to connect the concepts.</p>
+        <p class="intro-copy">Study 180 lecture-based practice questions, 174 textbook review prompts, or 120 new Study Guide Quiz questions. Follow the six units in your printable guide, then test what you remember.</p>
         <p><a class="secondary-button guide-download" href="ITEC3210-Midterm-Study-Guide.pdf" download>Download the 20-page study guide ↓</a></p>
       </div>
       <div class="progress-card" id="practiceProgressCard" aria-label="Practice study progress">
@@ -56,6 +56,7 @@
     <nav class="library-tabs" role="tablist" aria-label="Question library">
       <button class="library-tab active" id="practiceLibraryTab" type="button" role="tab" aria-selected="true" aria-controls="practiceLibrary" data-library="practice">Practice Questions <span>180</span></button>
       <button class="library-tab" id="textbookLibraryTab" type="button" role="tab" aria-selected="false" aria-controls="textbookLibrary" data-library="textbook">Textbook Questions <span>174</span></button>
+      <button class="library-tab" id="guideLibraryTab" type="button" role="tab" aria-selected="false" aria-controls="guideLibrary" data-library="guide">Study Guide Quiz <span>120</span></button>
     </nav>
 
     <div id="practiceLibrary" role="tabpanel" aria-labelledby="practiceLibraryTab">
@@ -251,6 +252,38 @@
         <div id="tbMap" class="question-map-grid"></div>
       </article>
     </section>
+
+    <section id="guideLibrary" class="hidden" role="tabpanel" aria-labelledby="guideLibraryTab">
+      <div class="section-heading"><div><p class="eyebrow">Read it. Recall it. Apply it.</p><h2>Study Guide Quiz</h2></div><p class="textbook-overall" id="sgOverall"></p></div>
+      <p class="source-note">Six sets of <strong>20 multiple-choice questions</strong>, following the 20-page midterm guide in order. Practise the distinctions, calculations and design reasoning it emphasizes. These are original study questions, not predicted exam questions or an instructor answer key.</p>
+      <div id="sgSetGrid" class="textbook-grid"></div>
+      <p class="source-note">The guide’s six units map to textbook <strong>Chapters 1–5 and 7</strong>. Chapter 6 is marked for later in the slides. Each answer explains the reasoning and links to the relevant guide page.</p>
+      <article class="textbook-reader" aria-labelledby="sgHeading">
+        <div class="section-heading"><div><p class="eyebrow" id="sgChapterLabel"></p><h2 id="sgHeading"></h2></div></div>
+        <div class="test-settings">
+          <label for="sgMode">Feedback <select id="sgMode"><option value="study">After each answer</option><option value="exam">At the end (exam practice)</option></select></label>
+          <div class="sg-start-actions"><button class="secondary-button" id="sgRestart" type="button">Restart unit</button><button class="secondary-button" id="sgShuffle" type="button">Shuffle &amp; restart</button></div>
+        </div>
+        <p class="source-note">Changing feedback, restarting or shuffling clears the current unit’s attempt. Switching units keeps each attempt. Best full-unit scores are retained; retries do not replace them.</p>
+        <p id="sgSaveStatus" class="source-note" role="status">Sessions and best scores are saved in this browser when storage is available.</p>
+        <div id="sgQuestionScreen">
+          <div class="card-status"><span id="sgPosition"></span><span id="sgAnswered"></span><span id="sgScore"></span></div>
+          <div class="test-progress"><span id="sgProgress"></span></div>
+          <p id="sgOriginal" class="sample-number"></p><h3 id="sgQuestion" class="textbook-question"></h3>
+          <a id="sgSource" class="sg-page-link" target="_blank" rel="noopener"></a>
+          <div id="sgOptions" class="options-list"></div>
+          <div id="sgFeedback" class="feedback hidden" aria-live="polite"><div id="sgFeedbackTitle" class="feedback-title"></div><p id="sgExplanation"></p></div>
+          <div class="sg-nav"><button id="sgPrevious" class="secondary-button" type="button">← Previous</button><button id="sgNext" class="secondary-button" type="button">Next question →</button><button id="sgFinish" class="primary-button hidden" type="button">Finish &amp; see results</button></div>
+          <p class="source-note">Choose one answer per question. Answers lock after selection. Use the map to visit unanswered questions; finish when every question is answered.</p>
+          <div id="sgMap" class="question-map-grid"></div>
+        </div>
+        <div id="sgResults" class="results-screen hidden" tabindex="-1" aria-label="Study Guide Quiz results">
+          <p class="eyebrow">Unit complete</p><h3>Your guide, put to the test.</h3><p class="result-score"><strong id="sgResultScore"></strong></p><p id="sgResultMessage"></p>
+          <div class="result-actions"><button id="sgRetry" class="primary-button" type="button">Retry missed</button><button id="sgResultRestart" class="secondary-button" type="button">Restart full unit</button></div>
+          <div id="sgReview" class="answer-review"></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>
@@ -263,7 +296,7 @@
       <svg viewBox="0 0 24 24"><path d="M20 11a8.1 8.1 0 1 1-2.3-5.7L20 7.6M20 3v4.6h-4.6"/></svg>
     </div>
     <h2>Reset practice progress?</h2>
-    <p>This clears the practice-set “know it” marks and restarts the practice test. Textbook drafts and self-checks are kept.</p>
+    <p>This clears the practice-set “know it” marks and restarts the practice test. Textbook drafts, self-checks and Study Guide Quiz progress are kept.</p>
     <div class="dialog-actions">
       <button class="secondary-button" id="cancelReset" type="button">Cancel</button>
       <button class="danger-button" id="confirmReset" type="button">Reset everything</button>
@@ -273,7 +306,9 @@
   <script src="practice-data.js"></script>
   <script src="practice-c.js"></script>
   <script src="textbook-data.js"></script>
+  <script src="study-guide-data.js"></script>
   <script src="app.js"></script>
   <script src="textbook.js"></script>
+  <script src="study-guide-quiz.js"></script>
 </body>
 </html>

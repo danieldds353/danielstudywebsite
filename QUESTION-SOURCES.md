@@ -190,3 +190,19 @@ Verbatim numbered review prompts from the user-supplied *Business Data Communica
 | 7 | 1-31 | 258-259 |
 
 Total: 174 review prompts. Chapter 5 efficiency checkpoints state HTTP/TCP/IPv4/link overhead assumptions explicitly; no official answer key was supplied. The full textbook questions are kept even where the slides omit or only partly cover a topic; selected scope notes identify that distinction.
+
+
+## Study Guide Quiz (120 original multiple-choice questions)
+
+The source is the included `ITEC3210-Midterm-Study-Guide.pdf`, the 20-page slide-first guide. These are original authored questions and explanations, not verbatim publisher questions or an official exam key. Every item carries its exact guide-page reference in `study-guide-data.js` and a page link in the interface. Numerical variants use the guide’s stated efficiency and conventional subnetting methods; every calculation states its quantities/assumptions.
+
+| Guide unit | Textbook chapter | Guide pages | Questions | Emphasis |
+| --- | --- | --- | --- | --- |
+| 1 | 1 | 2–3 | sg1-01 to sg1-20 | Technical goals, structure, scope, layers and encapsulation |
+| 2 | 2 | 4–5 | sg2-01 to sg2-20 | TPS functions, work placement, tiers, clients, middleware and cloud |
+| 3 | 3 | 6–7 | sg3-01 to sg3-20 | Direction, sharing, media selection, reach and conversion |
+| 4 | 4 | 8–9 | sg4-01 to sg4-20 | Access control, errors, CRC, overhead and efficiency |
+| 5 | 5 | 10–13 | sg5-01 to sg5-20 | Transport, address services, subnet derivations and routing |
+| 6 | 7 | 14–18 | sg6-01 to sg6-20 | Switching, rates, bottlenecks, WLAN operation and design |
+
+Chapter 6 is not substituted for the guide’s final unit. No detailed excluded routing-protocol comparison, SOHO section, or “latest Wi-Fi” ranking is added. Approximate fiber distances are framed as course comparisons; datagram terminology, UDP/TCP sizes, and DCF/PCF follow the guide’s explicit clarifications.
