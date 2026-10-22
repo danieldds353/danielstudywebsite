@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090e1a">
-  <meta name="description" content="A private Quizlet-style ITEC 3210 study tool with the original sample and two complete mock midterms.">
+  <meta name="description" content="ITEC 3210 lecture-focused study: 180 questions including Practice Set C and a printable midterm guide.">
   <title>ITEC 3210 Midterm Lab</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090e1a'/%3E%3Cpath d='M16 20h32M16 32h32M16 44h32M22 14v36M42 14v36' stroke='%23e31837' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='20' r='5' fill='%23f7f9ff'/%3E%3Ccircle cx='42' cy='32' r='5' fill='%23f7f9ff'/%3E%3Ccircle cx='22' cy='44' r='5' fill='%23f7f9ff'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
@@ -28,7 +28,7 @@
       <span class="meta-divider" aria-hidden="true"></span>
       <span>Andriy Pavlovych</span>
     </div>
-    <button class="icon-button" id="resetButton" type="button" title="Reset all study progress" aria-label="Reset all study progress">
+    <button class="icon-button" id="resetButton" type="button" title="Reset practice progress" aria-label="Reset practice progress">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 1 1-2.3-5.7L20 7.6M20 3v4.6h-4.6"/></svg>
     </button>
   </header>
@@ -38,9 +38,10 @@
       <div>
         <p class="eyebrow">Applied Data Communications &amp; Networks · Fall 2026</p>
         <h1 id="pageTitle">Know the network.<br><span>Own the midterm.</span></h1>
-        <p class="intro-copy">The original sample plus two complete 30-question practice sets, arranged in the same Week 1–5 sequence as the course syllabus.</p>
+        <p class="intro-copy">Study 180 lecture-based practice questions, or open Textbook Questions for all 174 end-of-chapter review prompts across six chapters. Use the printable guide to connect the concepts.</p>
+        <p><a class="secondary-button guide-download" href="ITEC3210-Midterm-Study-Guide.pdf" download>Download the 20-page study guide ↓</a></p>
       </div>
-      <div class="progress-card" aria-label="Study progress">
+      <div class="progress-card" id="practiceProgressCard" aria-label="Practice study progress">
         <div class="progress-ring" id="progressRing" style="--progress: 0">
           <span id="masteryPercent">0%</span>
         </div>
@@ -52,23 +53,30 @@
       </div>
     </section>
 
+    <nav class="library-tabs" role="tablist" aria-label="Question library">
+      <button class="library-tab active" id="practiceLibraryTab" type="button" role="tab" aria-selected="true" aria-controls="practiceLibrary" data-library="practice">Practice Questions <span>180</span></button>
+      <button class="library-tab" id="textbookLibraryTab" type="button" role="tab" aria-selected="false" aria-controls="textbookLibrary" data-library="textbook">Textbook Questions <span>174</span></button>
+    </nav>
+
+    <div id="practiceLibrary" role="tabpanel" aria-labelledby="practiceLibraryTab">
     <section class="set-section" aria-labelledby="setHeading">
       <div class="section-heading">
         <div>
           <p class="eyebrow">Question bank</p>
-          <h2 id="setHeading">Choose a 30-question set</h2>
+          <h2 id="setHeading">Choose your question set</h2>
         </div>
       </div>
       <div class="set-grid" id="setGrid"></div>
+      <p class="source-note">New questions are original practice, not predicted exam questions. Every explanation identifies its lecture source. Original sample keys are inferred; ambiguous questions are flagged.</p>
     </section>
 
     <section class="chapter-strip" aria-labelledby="chapterHeading">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Syllabus sequence</p>
+          <p class="eyebrow">Lecture sequence</p>
           <h2 id="chapterHeading">Choose a chapter</h2>
         </div>
-        <button class="text-button active" type="button" data-chapter="all">Study all 30</button>
+        <button class="text-button active" id="allChapterButton" type="button" data-chapter="all">Study all 30</button>
       </div>
       <div class="chapter-grid" id="chapterGrid"></div>
     </section>
@@ -92,6 +100,7 @@
       </div>
 
       <div id="flashcardView" role="tabpanel" aria-labelledby="flashcardTab">
+        <p id="cardWarning" class="wording-warning hidden" role="status"></p>
         <div class="card-status">
           <span id="cardChapter">Week 1</span>
           <span>Question <strong id="cardOriginalNumber">1</strong></span>
@@ -103,13 +112,14 @@
             <span class="flashcard-face flashcard-front">
               <span class="face-kicker">Question</span>
               <span class="question-text" id="flashQuestion"></span>
+              <span class="flash-options" id="flashOptions"></span>
               <span class="flip-hint">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14.8-4.2M20 4v4h-4M20 12a8 8 0 0 1-14.8 4.2M4 20v-4h4"/></svg>
                 Click to reveal answer
               </span>
             </span>
             <span class="flashcard-face flashcard-back">
-              <span class="face-kicker">Correct answer</span>
+              <span class="face-kicker">Study answer</span>
               <span class="answer-letter" id="flashAnswerLetter">A</span>
               <span class="answer-text" id="flashAnswer"></span>
               <span class="explanation" id="flashExplanation"></span>
@@ -117,6 +127,7 @@
             </span>
           </span>
         </button>
+        <p class="source-note" id="cardSource"></p>
 
         <div class="card-actions">
           <button class="round-button" id="previousCard" type="button" aria-label="Previous flashcard">
@@ -138,6 +149,11 @@
       </div>
 
       <div id="testView" class="hidden" role="tabpanel" aria-labelledby="testTab">
+        <div class="test-settings">
+          <label for="feedbackMode">Feedback <select id="feedbackMode"><option value="study">After each answer</option><option value="exam">At the end (exam practice)</option></select></label>
+          <button class="secondary-button" id="shuffleTest" type="button">Shuffle &amp; start test</button>
+        </div>
+        <p class="source-note">Changing feedback or shuffling starts a new session. This tests multiple-choice recall; practise written explanations below too.</p>
         <div id="testQuestionScreen">
           <div class="test-progress-row">
             <div>
@@ -148,8 +164,10 @@
           </div>
           <div class="test-progress"><span id="testProgressBar"></span></div>
           <article class="test-card">
+            <p id="testWarning" class="wording-warning hidden"></p>
             <p class="sample-number">Question <span id="testOriginalNumber">1</span></p>
             <h3 id="testQuestion"></h3>
+            <p class="source-note" id="testSource"></p>
             <div class="options-list" id="optionsList"></div>
             <div class="feedback hidden" id="testFeedback" aria-live="polite">
               <div class="feedback-title" id="feedbackTitle"></div>
@@ -169,6 +187,7 @@
             <button class="primary-button" id="retryMissed" type="button">Retry missed</button>
             <button class="secondary-button" id="restartTest" type="button">Restart test</button>
           </div>
+          <div id="answerReview" class="answer-review"></div>
         </div>
       </div>
     </section>
@@ -183,6 +202,55 @@
       </div>
       <div id="questionMap" class="question-map-grid"></div>
     </section>
+
+    <section class="written-practice" aria-labelledby="writtenHeading">
+      <div class="section-heading"><div><p class="eyebrow">Explain your reasoning</p><h2 id="writtenHeading">Written-answer practice</h2></div></div>
+      <p class="source-note">Try answering aloud or on paper before opening the checkpoints. These are fresh scenarios using lecture concepts, not assignment submission answers.</p>
+      <details><summary>1. Explain structured design for four LANs in a single building. Distinguish its organizational benefit from the technical goals.</summary><p>Checkpoints: access connects endpoints; distribution interconnects LANs; the lecture's campus core is unnecessary for this scope. Modularity and a clear hierarchy organize design and maintenance. Performance, availability and scalability require specific capacity, redundancy and expansion decisions.</p><p class="source-note">Lecture 1, slides 28–33 and 43.</p></details>
+      <details><summary>2. Compare client-based and client-server TPS designs. Explain why the location of data access logic matters.</summary><p>Checkpoints: client-based keeps storage at the server but queries and application processing at the client, producing excessive data movement. Client-server performs data access at the server and can return the needed subset. Presentation stays at the client; application logic can be split. Justify performance and capacity separately from failure tolerance.</p><p class="source-note">Lecture 2, slides 9–12.</p></details>
+      <details><summary>3. A company needs short desktop connections and a long link through electrical interference. Recommend media for each and justify the trade-offs.</summary><p>Checkpoints: twisted-pair is inexpensive and appropriate for typical desktop channels up to 100 m. Fiber with suitable optics supports the longer span and resists electromagnetic interference, at greater cost. Check distance, compatible connectors/optics, data-rate support and installation needs.</p><p class="source-note">Lecture 3, slides 10–18.</p></details>
+      <details><summary>4. Explain what CRC-32 does and what it cannot do. Relate your answer to TCP and UDP.</summary><p>Checkpoints: the Ethernet receiver checks an error-detection value; corrupted frames are discarded. CRC does not repair damaged data. Reliable TCP delivery can recover via retransmission, whereas UDP itself provides no delivery/retransmission guarantee. Detection is not proof that absolutely no errors can ever go undetected.</p><p class="source-note">Lecture 3, slide 32; Lecture 4, slide 9.</p></details>
+      <details><summary>5. A Class B network needs at least 70 equal-size subnets. Derive the borrowed bits, mask, usable hosts and spare subnets.</summary><p>Checkpoints: 2^6 = 64 is too small; borrow 7. Prefix /16 + 7 = /23; mask 255.255.254.0. Nine host bits remain: 2^9 − 2 = 510 usable hosts per subnet. There are 128 subnets, so 58 remain after allocating 70. More hosts than this per subnet require a different allocation or another subnet.</p><p class="source-note">Lecture 4, slides 17–21. New subnetting scenario.</p></details>
+      <details><summary>6. Explain why a /29 subnet has six usable host addresses, and why a Class B block and Class C block yield different subnet counts with that mask.</summary><p>Checkpoints: 32 − 29 = 3 host bits, giving 8 total addresses minus network and broadcast = 6. Class B /16 borrows 13 bits, yielding 8,192 subnets; Class C /24 borrows 5, yielding 32. Final mask determines host count; original block determines how many subnets fit inside it.</p><p class="source-note">Lecture 4, slides 19–21.</p></details>
+      <details><summary>7. An update carries 300 useful bytes with 20-byte TCP, 20-byte IPv4 and 40-byte link overhead. Calculate efficiency, then explain the effects of doubling frequency and reducing payload to 30 bytes.</summary><p>Checkpoints: total overhead 80; efficiency 300 / 380 = 78.95%. Doubling frequency leaves the ratio unchanged if every message keeps the same sizes. With 30 useful bytes, efficiency is 30 / 110 = 27.27%. More messages increase bytes per second; smaller payloads increase the overhead share. Use this question's stated overhead rather than memorizing a universal Ethernet value.</p><p class="source-note">Lecture 3, slides 33–34. Fresh calculation using the efficiency method emphasized in Assignment 1.</p></details>
+      <details><summary>8. Distinguish DNS, DHCP, ARP and routing when a host contacts a destination on another subnet.</summary><p>Checkpoints: DNS resolves a hostname to an IP address if needed; DHCP can supply the host's IP configuration. The host sends remote-subnet traffic toward its gateway. ARP finds that gateway's local MAC address; routers use routing tables to forward the IP packet. ARP is not used by the sender to discover a remote host's MAC across the Internet.</p><p class="source-note">Lecture 4, slides 10–14 and 22.</p></details>
+    </section>
+
+    <details class="coverage-panel"><summary>What this revision covers</summary><p>Lecture 1: foundations, structured design, layers and goals. Lecture 2: TPS application functions, architectures, middleware and cloud models. Lecture 3: media, circuits, transmission, access control, error detection and efficiency. Lecture 4: transport, addresses, subnetting and routing. Lecture 5: wired and wireless LANs.</p><p>The newly supplied 05 Wired and Wireless LANs PDF replaces the earlier mislabeled duplicate. The material spans textbook Chapters 1–5 and 7. The LAN title slide explicitly says Chapter 6 is covered later. The guide uses six study units so the course sequence is clear without inventing Chapter 6 coverage.</p><p>Set C focuses on the three newly supplied slide decks and retains a source reference for every answer. Older sets keep their existing questions and progress. A disabled chapter button means that set has no questions in that chapter.</p><p>Lecture 4 slide 26 excludes its detailed routing table from exams. The new questions do not use it or expand application-layer textbook sections marked as not covered. Sample Q4's old key was corrected using overhead efficiency. Q19, Q11 and Q23 explain ambiguous wording; no instructor answer key was supplied. <a href="QUESTION-SOURCES.md">Full practice-question source map</a>.</p></details>
+    </div>
+
+    <section id="textbookLibrary" class="hidden" role="tabpanel" aria-labelledby="textbookLibraryTab">
+      <div class="section-heading"><div><p class="eyebrow">From your uploaded textbook · 14th edition</p><h2>Textbook Questions</h2></div><p class="textbook-overall" id="tbOverall"></p></div>
+      <p class="source-note">All numbered questions from each chapter’s end-of-chapter <strong>Questions</strong> section, retaining the book’s wording and numbering. These are written-response prompts. Reveal the authored study checkpoints after attempting your answer; they are not a publisher or instructor answer key.</p>
+      <div class="textbook-grid" id="textbookSetGrid"></div>
+      <p class="source-note">The six course-aligned chapters are <strong>1, 2, 3, 4, 5 and 7</strong>. Chapter 6 is marked for later in your LAN slides. Full textbook coverage includes topics outside the lecture emphasis; those are identified below. Exercises and minicases are separate book sections and are not counted here.</p>
+
+      <article class="textbook-reader" aria-labelledby="tbHeading">
+        <div class="section-heading"><div><p class="eyebrow" id="tbChapterLabel"></p><h2 id="tbHeading">Chapter review</h2></div><button class="secondary-button" id="tbShuffle" type="button">Shuffle this chapter</button></div>
+        <div class="card-status"><span id="tbState"></span><span id="tbPosition"></span><span id="tbChapterProgress"></span></div>
+        <p class="wording-warning hidden" id="tbScopeNote"></p>
+        <h3 class="textbook-question" id="tbQuestion"></h3>
+        <p class="source-note" id="tbSource"></p>
+        <label class="draft-label" for="tbDraft">Your answer <span>(optional · saved in this browser)</span></label>
+        <textarea id="tbDraft" rows="5" placeholder="Explain it in your own words before revealing the checkpoints…"></textarea>
+        <p class="source-note" id="tbDraftStatus" aria-live="polite"></p>
+        <button class="primary-button" id="tbReveal" type="button" aria-expanded="false" aria-controls="tbAnswerPanel">Show answer checkpoints</button>
+        <div id="tbAnswerPanel" class="textbook-answer hidden">
+          <p class="eyebrow">Study checkpoints · self-assess your reasoning</p>
+          <p id="tbAnswer"></p>
+          <p class="source-note">Compare the concepts and justification, not exact phrasing. Discussion questions can have several defensible answers. Numerical answers state their assumptions.</p>
+        </div>
+        <div class="textbook-actions">
+          <button class="secondary-button" id="tbPrevious" type="button">← Previous</button>
+          <button class="knowledge-button still-learning" id="tbReview" type="button">Review again</button>
+          <button class="knowledge-button know-it" id="tbKnown" type="button">Know it</button>
+          <button class="secondary-button" id="tbNext" type="button">Next →</button>
+        </div>
+        <p class="source-note">Self-check marks track confidence; written answers are not automatically graded.</p>
+        <div class="section-heading"><div><p class="eyebrow">Original question numbers</p><h3>Jump to a question</h3></div></div>
+        <div id="tbMap" class="question-map-grid"></div>
+      </article>
+    </section>
   </main>
 
   <footer>
@@ -194,8 +262,8 @@
     <div class="dialog-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24"><path d="M20 11a8.1 8.1 0 1 1-2.3-5.7L20 7.6M20 3v4.6h-4.6"/></svg>
     </div>
-    <h2>Reset your progress?</h2>
-    <p>This clears every “know it” mark and restarts the practice test.</p>
+    <h2>Reset practice progress?</h2>
+    <p>This clears the practice-set “know it” marks and restarts the practice test. Textbook drafts and self-checks are kept.</p>
     <div class="dialog-actions">
       <button class="secondary-button" id="cancelReset" type="button">Cancel</button>
       <button class="danger-button" id="confirmReset" type="button">Reset everything</button>
@@ -203,6 +271,9 @@
   </dialog>
 
   <script src="practice-data.js"></script>
+  <script src="practice-c.js"></script>
+  <script src="textbook-data.js"></script>
   <script src="app.js"></script>
+  <script src="textbook.js"></script>
 </body>
 </html>

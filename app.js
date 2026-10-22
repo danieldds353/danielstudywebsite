@@ -1,9 +1,9 @@
 const chapters = [
-  { id: 1, week: "Week 1", title: "Course Introduction & Network Foundations", short: "Network foundations", color: "#51d7ff" },
-  { id: 2, week: "Week 2", title: "Application Layer & Architectures", short: "Application layer", color: "#9b8cff" },
-  { id: 3, week: "Week 3", title: "Physical & Data Link Layers", short: "Physical + data link", color: "#ffcb67" },
-  { id: 4, week: "Week 4", title: "Network & Transport Layers", short: "Network + transport", color: "#56dda0" },
-  { id: 5, week: "Week 5", title: "Wired & Wireless LANs", short: "LANs", color: "#ff6680" }
+  { id: 1, week: "Lecture 1 · Ch. 1", title: "Foundations, Structured Design & Technical Goals", short: "Network foundations", color: "#51d7ff" },
+  { id: 2, week: "Lecture 2 · Ch. 2", title: "Application Layer & Architectures", short: "Application layer", color: "#9b8cff" },
+  { id: 3, week: "Lecture 3 · Ch. 3–4", title: "Physical & Data Link Layers", short: "Physical + data link", color: "#ffcb67" },
+  { id: 4, week: "Lecture 4 · Ch. 5", title: "Network, Transport & Subnetting", short: "Network + transport", color: "#56dda0" },
+  { id: 5, week: "Lecture 5 · Ch. 7", title: "Wired & Wireless LANs", short: "Wired + wireless LANs", color: "#ff6680" }
 ];
 
 const sampleQuestions = [
@@ -11,8 +11,8 @@ const sampleQuestions = [
     id: 4, chapter: 1,
     question: "Which of the following is true regarding multi-layer model of communication?",
     options: ["Having multiple layers makes the communication faster", "The efficiency is higher when the packet sizes are larger", "Additional layers make protocol design more challenging", "Each layered model comes with its own set of protocols that normally does not change", "IP is the most common transport layer protocol"],
-    answer: 3,
-    explanation: "A layered model defines a stable protocol suite for its layers. Layering organizes communication functions; it does not automatically make communication faster, and IP belongs to the network layer."
+    answer: 1,
+    explanation: "For fixed overhead, larger payloads increase useful-data efficiency. Lecture 1 slide 36 explains layering overhead and Lecture 3 slide 33 gives the efficiency formula. The previous site's key D was unsupported: layering does not require an unchanging protocol suite."
   },
   {
     id: 6, chapter: 1,
@@ -67,8 +67,8 @@ const sampleQuestions = [
     id: 19, chapter: 2,
     question: "Which of the following is a common disadvantage of having a host-based architecture?",
     options: ["Only one CPU (or a couple) are responsible for all the processing", "The applications are more difficult to develop", "It is more expensive to upgrade the equipment when only small changes are needed", "The slowest device is going to affect the whole system", "The architecture is not very reliable"],
-    answer: 0,
-    explanation: "Host-based architecture centralizes processing on one host or a small number of CPUs, which can become a bottleneck as demand grows."
+    answer: 2,
+    explanation: "Lecture 2 slide 8 specifically emphasizes costly upgrades in large increments (C), and also mentions a central bottleneck (A). Both are defensible disadvantages, so this original sample is ambiguous. Treat C as the slide-emphasized study answer, not a confirmed official key."
   },
   {
     id: 20, chapter: 2,
@@ -102,8 +102,8 @@ const sampleQuestions = [
     id: 23, chapter: 3,
     question: "What is the typical maximum distance typically supported by a single-mode fiber Ethernet cable?",
     options: ["80+ km", "40 km", "10 km", "500 m", "100 m"],
-    answer: 1,
-    explanation: "A commonly cited maximum for standard long-reach single-mode Ethernet is about 40 km. Longer spans require specialized optics."
+    answer: 0,
+    explanation: "Lecture 3 slides 12–13 describe single-mode fiber reaching 100 km or more, which best matches A (80+ km). Actual Ethernet reach depends on the optical standard and transceivers; a particular optic's 40 km rating is not a universal maximum. The sample gives no optic, so its intended official answer cannot be confirmed."
   },
   {
     id: 24, chapter: 3,
@@ -159,7 +159,7 @@ const sampleQuestions = [
     question: "Datagram is a name of a PDU at which Internet Model layer?",
     options: ["Application", "Presentation", "Session", "Network", "Transport"],
     answer: 3,
-    explanation: "At the network layer, the protocol data unit is commonly called a packet or datagram."
+    explanation: "Network is the likely intended answer for an IP datagram. However, Lecture 4 slide 8 also calls UDP transport PDUs datagrams. The protocol is unspecified, making Network and Transport defensible. New practice questions specify IP or UDP to avoid this ambiguity."
   },
   {
     id: 12, chapter: 4,
@@ -219,35 +219,47 @@ const sampleQuestions = [
   }
 ];
 
+// Keep original stems while marking inferred/ambiguous study keys explicitly.
+const sampleReferences = {4:'Lecture 1 slide 36; Lecture 3 slide 33',6:'Lecture 1 slide 26',7:'Lecture 1 slide 27',8:'Lecture 1 slide 28',9:'Lecture 1 slide 33',10:'Lecture 1 slide 34',14:'Lecture 2 slides 5–6',15:'Lecture 2 slide 7',17:'Textbook Ch. 2 (supplement; not developed in uploaded application slides)',18:'Lecture 2 slide 9',19:'Lecture 2 slide 8',20:'Lecture 2 slide 20',21:'Lecture 2 slide 9',28:'Lecture 2 slide 14',16:'Lecture 3 slide 11',22:'Lecture 3 slides 6–7',23:'Lecture 3 slides 12–13',24:'Lecture 3 slide 6',25:'Original sample; standard four-pair Ethernet cabling',26:'Lecture 3 slide 32',27:'Lecture 3 slides 10,17',29:'Lecture 3 slide 28'};
+sampleQuestions.forEach(q => {
+  if(q.chapter === 5) q.chapter = [8,9].includes(q.id) ? 1 : 3;
+  q.source = `Original photo Q${q.id} · ${sampleReferences[q.id] || 'Lecture 4 slides 8–19'} · study key inferred`;
+  if([11,19,23].includes(q.id)) q.warning = 'Original wording is ambiguous; see explanation.';
+  if(q.id === 7) q.warning = 'The photo crops the question stem; this stem was reconstructed in the earlier site.';
+});
+sampleQuestions.sort((a,b)=>a.chapter-b.chapter || a.id-b.id);
+
 const questionSets = {
   sample: {
     label: "Original Sample",
-    description: "The 30 supplied midterm questions",
+    description: "30 photo questions · reviewed study keys",
     badge: "OS",
     color: "#51d7ff",
     questions: sampleQuestions
   },
   setA: {
     label: "Practice Set A",
-    description: "Fresh questions at matching difficulty",
+    description: "30 fresh questions · lecture-focused",
     badge: "A",
     color: "#9b8cff",
     questions: window.practiceSets.setA
   },
   setB: {
     label: "Practice Set B",
-    description: "A second full mock midterm",
+    description: "30 fresh questions · calculations & concepts",
     badge: "B",
     color: "#ff6680",
     questions: window.practiceSets.setB
-  }
+  },
+  setC: {label:"Practice Set C",description:"30 new questions · updated slides + LANs",badge:"C",color:"#ffcb67",questions:window.practiceSets.setC},
+  drills: { label: "Lecture Drills", description: "60 focused questions · study by concept", badge: "LD", color: "#56dda0", questions: window.practiceSets.drills }
 };
 
-let selectedSet = "sample";
+let selectedSet = "setC";
 let questions = questionSets[selectedSet].questions;
 
 const letters = ["A", "B", "C", "D", "E"];
-const storageKey = "itec3210-midterm-progress-v1";
+const storageKey = "itec3210-midterm-progress-slides-v2";
 let savedProgress = loadProgress();
 let selectedChapter = "all";
 let activeQuestions = [...questions];
@@ -257,6 +269,7 @@ let testIndex = 0;
 let testScore = 0;
 let testAnswers = [];
 let testLocked = false;
+let examMode = false;
 
 const byId = (id) => document.getElementById(id);
 
@@ -270,7 +283,7 @@ function loadProgress() {
 }
 
 function saveProgress() {
-  localStorage.setItem(storageKey, JSON.stringify(savedProgress));
+  try { localStorage.setItem(storageKey, JSON.stringify(savedProgress)); } catch { /* Study remains usable when storage is unavailable. */ }
   renderMastery();
   renderQuestionMap();
 }
@@ -284,11 +297,12 @@ function getChapter(id) {
 }
 
 function setChapter(chapterId) {
+  if(chapterId !== 'all' && !questions.some(q=>q.chapter===Number(chapterId))) return;
   selectedChapter = chapterId;
   activeQuestions = chapterId === "all" ? [...questions] : questions.filter((question) => question.chapter === Number(chapterId));
   cardIndex = 0;
   const chapter = chapterId === "all" ? null : getChapter(Number(chapterId));
-  byId("activeChapterLabel").textContent = chapter ? `${chapter.week} · ${chapter.title}` : "All chapters · Weeks 1–5";
+  byId("activeChapterLabel").textContent = chapter ? `${chapter.week} · ${chapter.title}` : `${questionSets[selectedSet].label} · All uploaded topics`;
   document.querySelectorAll("[data-chapter]").forEach((button) => {
     button.classList.toggle("active", String(button.dataset.chapter) === String(chapterId));
   });
@@ -309,7 +323,8 @@ function setQuestionSet(setId) {
   document.querySelectorAll("[data-chapter]").forEach((button) => {
     button.classList.toggle("active", button.dataset.chapter === "all");
   });
-  byId("activeChapterLabel").textContent = `${questionSets[setId].label} · Weeks 1–5`;
+  byId("activeChapterLabel").textContent = `${questionSets[setId].label} · All uploaded topics`;
+  renderChapters();
   resetTest(activeQuestions);
   renderMastery();
   renderFlashcard();
@@ -321,7 +336,7 @@ function renderSets() {
     <button class="set-button ${id === selectedSet ? "active" : ""}" style="--set-color:${set.color}" type="button" data-set="${id}">
       <span class="set-badge">${set.badge}</span>
       <span class="set-copy"><strong>${set.label}</strong><span>${set.description}</span></span>
-      <span class="set-count">30 Q</span>
+      <span class="set-count">${set.questions.length} Q</span>
     </button>
   `).join("");
   document.querySelectorAll("[data-set]").forEach((button) => {
@@ -332,15 +347,16 @@ function renderSets() {
 function renderChapters() {
   byId("chapterGrid").innerHTML = chapters.map((chapter) => {
     const count = questions.filter((question) => question.chapter === chapter.id).length;
-    return `<button class="chapter-button" style="--chapter-color:${chapter.color}" type="button" data-chapter="${chapter.id}">
+    return `<button class="chapter-button" style="--chapter-color:${chapter.color}" type="button" data-chapter="${chapter.id}" ${count===0?'disabled aria-disabled="true"':''}>
       <span class="chapter-number">${chapter.week}</span>
       <span class="chapter-title">${chapter.title}</span>
-      <span class="chapter-count">${count} sample questions</span>
+      <span class="chapter-count">${count} questions</span>
     </button>`;
   }).join("");
+  byId("allChapterButton").textContent = `Study all ${questions.length}`;
 
   document.querySelectorAll("[data-chapter]").forEach((button) => {
-    button.addEventListener("click", () => setChapter(button.dataset.chapter));
+    button.onclick = () => setChapter(button.dataset.chapter);
   });
 }
 
@@ -364,9 +380,18 @@ function renderFlashcard() {
   byId("cardPosition").textContent = cardIndex + 1;
   byId("cardTotal").textContent = activeQuestions.length;
   byId("flashQuestion").textContent = item.question;
+  byId('flashOptions').replaceChildren();
+  item.options.forEach((option,index) => {
+    const span=document.createElement('span');
+    span.textContent=`${letters[index]}. ${option}`;
+    byId('flashOptions').appendChild(span);
+  });
   byId("flashAnswerLetter").textContent = letters[item.answer];
   byId("flashAnswer").textContent = item.options[item.answer];
   byId("flashExplanation").textContent = item.explanation;
+  byId("cardSource").textContent = item.source;
+  byId("cardWarning").textContent = item.warning || '';
+  byId("cardWarning").classList.toggle('hidden', !item.warning);
   byId("previousCard").disabled = activeQuestions.length < 2;
   byId("nextCard").disabled = activeQuestions.length < 2;
   const state = savedProgress[item.id];
@@ -436,6 +461,9 @@ function renderTestQuestion() {
   byId("testTotal").textContent = testQuestions.length;
   byId("testOriginalNumber").textContent = displayNumber(item);
   byId("testQuestion").textContent = item.question;
+  byId("testSource").textContent = item.source;
+  byId("testWarning").textContent = item.warning || '';
+  byId("testWarning").classList.toggle('hidden', !item.warning);
   byId("testProgressBar").style.width = `${(testIndex / testQuestions.length) * 100}%`;
   byId("testFeedback").classList.add("hidden");
   byId("nextQuestion").classList.add("hidden");
@@ -456,20 +484,21 @@ function chooseAnswer(choice) {
   const item = testQuestions[testIndex];
   const isCorrect = choice === item.answer;
   if (isCorrect) testScore += 1;
-  testAnswers.push({ id: item.id, correct: isCorrect });
-  byId("liveScore").textContent = testScore;
+  testAnswers.push({ id: item.id, choice, correct: isCorrect });
+  byId("liveScore").textContent = examMode ? '—' : testScore;
 
   document.querySelectorAll("[data-answer]").forEach((button) => {
     const value = Number(button.dataset.answer);
     button.disabled = true;
-    if (value === item.answer) button.classList.add("correct");
-    if (value === choice && !isCorrect) button.classList.add("incorrect");
+    if (!examMode && value === item.answer) button.classList.add("correct");
+    if (!examMode && value === choice && !isCorrect) button.classList.add("incorrect");
+    if (examMode && value === choice) button.classList.add('chosen');
   });
 
   byId("feedbackTitle").textContent = isCorrect ? "Correct" : `Not quite — the answer is ${letters[item.answer]}`;
   byId("feedbackTitle").style.color = isCorrect ? "var(--green)" : "var(--red-bright)";
   byId("feedbackExplanation").textContent = item.explanation;
-  byId("testFeedback").classList.remove("hidden");
+  byId("testFeedback").classList.toggle("hidden", examMode);
   byId("nextQuestion").textContent = testIndex === testQuestions.length - 1 ? "See results →" : "Next question →";
   byId("nextQuestion").classList.remove("hidden");
 }
@@ -494,6 +523,19 @@ function showResults() {
   byId("resultHeadline").textContent = percent >= 85 ? "Network locked in." : percent >= 70 ? "Solid connection." : "Time for another pass.";
   byId("resultMessage").textContent = missed === 0 ? "Perfect score. Every question in this session was correct." : `You missed ${missed} ${missed === 1 ? "question" : "questions"}. Review those cards, then run them again.`;
   byId("retryMissed").classList.toggle("hidden", missed === 0);
+  const review = byId('answerReview');
+  review.replaceChildren();
+  testAnswers.forEach(a => {
+    const q = testQuestions.find(q=>q.id === a.id);
+    const detail = document.createElement('details');
+    const summary = document.createElement('summary');
+    summary.textContent = `${a.correct ? '✓' : '✕'} Q${displayNumber(q)} · ${q.question}`;
+    detail.appendChild(summary);
+    for (const text of [`Your answer: ${letters[a.choice]}. ${q.options[a.choice]}`, `Study answer: ${letters[q.answer]}. ${q.options[q.answer]}`, q.explanation, q.source]) {
+      const p = document.createElement('p'); p.textContent = text; detail.appendChild(p);
+    }
+    review.appendChild(detail);
+  });
 }
 
 function retryMissed() {
@@ -502,6 +544,12 @@ function retryMissed() {
 }
 
 function wireEvents() {
+  byId('feedbackMode').addEventListener('change', e => { examMode = e.target.value === 'exam'; resetTest(activeQuestions); });
+  byId('shuffleTest').addEventListener('click', () => {
+    const shuffled = [...activeQuestions];
+    for(let i=shuffled.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]]; }
+    resetTest(shuffled); setMode('test');
+  });
   byId("flashcard").addEventListener("click", () => {
     const flipped = byId("flashcard").classList.toggle("flipped");
     byId("flashcard").setAttribute("aria-pressed", String(flipped));
@@ -520,7 +568,7 @@ function wireEvents() {
   byId("cancelReset").addEventListener("click", () => dialog.close());
   byId("confirmReset").addEventListener("click", () => {
     savedProgress = {};
-    localStorage.removeItem(storageKey);
+    try { localStorage.removeItem(storageKey); } catch { /* Storage may be disabled. */ }
     resetTest(activeQuestions);
     renderMastery();
     renderQuestionMap();
@@ -532,7 +580,7 @@ function wireEvents() {
   });
 
   document.addEventListener("keydown", (event) => {
-    if (byId("flashcardView").classList.contains("hidden") || dialog.open || ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+    if (byId('practiceLibrary').classList.contains('hidden') || byId("flashcardView").classList.contains("hidden") || dialog.open || ["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) return;
     if (event.code === "Space") {
       event.preventDefault();
       byId("flashcard").click();
