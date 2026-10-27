@@ -1,73 +1,104 @@
-# ITEC 3210 Midterm Lab — Lecture Revision
+# Study Lab — Networking Midterm update
 
-The original Quizlet-style design, updated for the uploaded slides from Andriy Pavlovych's ITEC 3210 course. Includes 180 multiple-choice questions: the original 30, three 30-question mock sets (A/B/C), and 60 lecture drills. Also includes eight written prompts, a 20-page PDF study guide, 174 textbook review prompts, and 120 original Study Guide Quiz questions.
+**New tab: Networking Midterm.** Includes exactly **34 original MCQs and 3 short answers**, with 1–2 sentence model answers. This category covers networking and is separate from the existing ITEC 3505 project-management banks.
 
-## Open locally
+## Upload this version
 
-Extract the ZIP first, then open `index.html`. No installation, account, build or internet connection is required.
+Extract the ZIP and upload **all its contents into the existing GitHub Pages folder containing `index.html`**, replacing matching files. Do not upload the ZIP itself or add an extra enclosing folder. Open your existing site and choose **Networking Midterm**. On a narrow screen, scroll the navigation sideways.
 
-## Put it on GitHub
+You can also open `networking.html` directly on your computer. No build, account, installation, or server is required. Browser-local saving may be restricted for local files.
 
-To update your existing site, upload `index.html`, `styles.css`, `practice-data.js`, `practice-c.js`, `textbook-data.js`, `textbook.js`, `study-guide-data.js`, `study-guide-quiz.js`, `app.js`, `QUESTION-SOURCES.md`, `ITEC3210-Midterm-Study-Guide.pdf` and `README.md` to the same folder as the existing `index.html`, replacing matching files. Commit, allow the existing deployment to finish, then refresh. Keep the files together. No existing hosting configuration change is needed.
+## Networking practice
 
-For a new repository, upload the same files to its root. GitHub Pages uses Settings → Pages → Deploy from a branch → main → / (root).
+- 12 subnetting MCQs, 12 TCP/UDP/transport MCQs, 6 intranet/extranet/access MCQs, and 4 networking-foundation MCQs, mixed into a fixed 34-question order.
+- 3 short answers: TCP versus UDP, the transport layer, and extranets. Aim for 1–2 sentences each.
+- One question at a time, question navigation, saved responses, submission, automatic MCQ score out of 34, topic results, and explanations.
+- Short answers are **not automatically graded**. Compare your response with the model and self-assess two key points per question. The optional score out of 6 is a practice convention, not an instructor rubric.
+- Quick review includes the difference between borrowed bits, number of subnets, and usable-host counts.
+- `networking-printable.html` provides the questions and answer key; its print buttons can save a PDF with or without answers.
+- Retrying replaces only the current networking attempt and uses the same questions. Progress for the two PM sets remains independent.
 
-This revision uses a separate browser-progress key so replaced questions do not inherit old mastery marks. Old-site progress is not deleted.
+This is untimed practice. The screenshot supplies topic guidance, not a confirmed exam outline. The question mix and difficulty are practice choices. All questions are original teaching examples; references link to RFCs, Cisco, NIST, and Cloudflare. The Cisco extranet case is historical and used only to illustrate the concept. The networking questions are not attributed to Schwalbe.
 
-## Privacy reminder
+Files added: `networking.html`, `networking.css`, `networking.js`, `networking-data.js`, and `networking-printable.html`. Existing `app.js`, `index.html`, and `set2.html` add the category link and refreshed asset versions. The original question-bank files and printable PM exams are preserved.
 
-The course syllabus says course materials may not be publicly posted or distributed without the instructor's permission. Keep the repository private unless the instructor authorizes public sharing. Note that GitHub Pages publishes a site publicly on standard personal accounts.
+Networking responses stay in this browser under a separate storage key. There is no backend or answer upload. If storage is unavailable, the interface displays a warning and works for the current page session.
 
-## Included study tools
+## Verification of this update
 
-- Original 30-question sample retained, with reviewed study keys and ambiguity notes
-- Three 30-question mock sets (A/B/C) and 60 focused lecture drills
-- Five answer choices and explanations for every question
-- Chronological organization by the five uploaded lecture topics
-- Flashcards with answer explanations
-- Immediate-feedback study tests or feedback-at-end exam practice
-- Shuffle, answer review and eight written-answer prompts with reasoning checkpoints
-- Retry-missed mode
-- Progress saved in the browser
-- Keyboard controls and responsive mobile layout
+Programmatic checks cover exact question counts, valid choices, scores, short-answer self-assessment, saved responses, safe display of typed text, reset isolation, subnet calculations, relative links, and ZIP integrity. The existing PM bank tests are also run. Live browser layout could not be verified under the current preview restrictions.
 
-## Content basis
+---
 
-New questions primarily use Lecture 1 (foundations/goals), Lecture 2 (applications), Lecture 3 (physical/data link) and Lecture 4 (network/transport). The new 05 Wired and Wireless LANs.pdf adds Lecture 5, textbook Chapter 7. This replaces the earlier mislabeled duplicate of Lecture 4. The application-layer and Week 3 files repeat Lectures 2 and 3. The supplied sequence is Chapters 1-5 and 7; the LAN title slide states Chapter 6 is covered later.
+The prior PM-specific documentation follows; its exam-format notes apply only to those PM banks.
 
-Fresh numerical scenarios use the subnetting and efficiency methods emphasized by the slides and Assignment 1. The ZIP includes the original study-guide PDF, but not the lecture PDFs, textbook or assignment PDF. Use the overhead stated in each calculation; do not assume one universal Ethernet overhead value. Subnet exercises follow the course's conventional model: 2^s subnets, 2^h - 2 usable hosts, and at least two host bits remaining.
+# ITEC 3505 Study Lab — two separate midterm practice sets
 
-Lecture 4 slide 26's detailed routing table is explicitly excluded from exams and is not used. New questions do not expand the application-layer textbook sections 2.3–2.6 marked as not covered. Original sample-only material is retained for continuity and identified in its references.
+This update adds **Practice Set 2**: 100 additional original questions covering Chapters 1–6 of Schwalbe’s *Information Technology Project Management*, ninth edition.
 
-No instructor answer key was supplied. Q4 now uses the supported efficiency answer. Q11 (datagram), Q19 (host-based disadvantages) and Q23 (single-mode reach) explain ambiguity rather than claiming an official key. Q7 retains the earlier site's reconstruction of a cropped stem.
+**Practice Set 1 remains unchanged.** The website now contains 200 midterm questions across two separate sets, plus the existing 105 final-exam questions for Chapters 7–13.
 
-These are original practice questions, not predictions or guarantees about the actual exam. The lecture identifies multiple-choice and written-answer components; practise explaining reasoning too. Every new question has a source reference, also listed in `QUESTION-SOURCES.md`.
+## Upload this update to your existing GitHub website
 
-## Verification
+1. Extract the ZIP on your computer.
+2. Upload **all extracted files into the same repository folder that currently contains your website’s `index.html`**. Replace files with the same names and add the new files. Do not upload just the ZIP or place the files inside an extra nested folder.
+3. Save/commit the upload and let your existing GitHub Pages deployment finish.
+4. Open your website and select **Practice Set 2** in its navigation. On a narrow screen, the navigation scrolls horizontally.
 
-JavaScript syntax, bank integrity and numerical answers were checked. A DOM simulation covering all 180 questions exercised set/chapter changes, flashcards, mastery, answer locking, scoring, end-feedback mode, review, retry-missed, shuffle and reset. Live browser QA also verified Set C, the LAN filter, scoring, slide references and end-feedback exam mode. The 20-page PDF was rendered and visually checked.
+The package includes the complete website. No installation or build command is needed. It has not been uploaded or published to GitHub for you.
 
-## Set C update (October 22, 2026)
+For local use, open `index.html` for Set 1 or `set2.html` for Set 2. JavaScript is required for interactive practice. The printable pages can be read without it.
 
-Set C has six physical/data-link questions, eight network/transport questions and sixteen wired/wireless LAN questions. It opens by default. Existing sets and their progress keys are retained. A disabled chapter button means that the selected set has no questions in that chapter. Use the guide download on the homepage for six study units in course order, with clear textbook-chapter mapping.
+## What is included
 
-## Textbook Questions tab
+- `index.html`: original Study Lab / Practice Set 1 entry page.
+- `set2.html`: new Practice Set 2 entry page and separate navigation tab.
+- `data.js`: unchanged original 100 midterm and 105 final questions, plus chapter notes.
+- `set2-data.js`: 100 new questions, explained answers, and printed textbook page references.
+- `app.js` and `styles.css`: shared application and appearance.
+- `printable.html`: original Set 1 questions and answers.
+- `set2-printable.html`: separate printable Set 2 questions, followed by its explained answer key. Its Print / save as PDF button uses your browser’s print dialog.
+- `STUDY_GUIDE.md`: review guidance, formulas, and ninth-edition notes.
+- `.nojekyll` and `.gitignore`: static-site support files.
 
-Contains all 174 numbered end-of-chapter Questions from the user-supplied 14th-edition textbook: Chapter 1 (24), Chapter 2 (22), Chapter 3 (40), Chapter 4 (29), Chapter 5 (28), and Chapter 7 (31). These are the six chapters in the lecture sequence; textbook Chapter 6 is marked for later in the instructor slides. Exercises, minicases and online test banks are separate and are not included.
+All links and assets are relative so repository subpaths work. No backend, external fonts, analytics, accounts, or API keys are required. Textbook and professor PDFs are not redistributed.
 
-Prompts retain the original wording and numbers, with extracted line breaks normalized. Source labels identify chapter, question and PDF page range. These are written-response questions, not publisher-provided multiple-choice items. Revealed checkpoints are authored study guidance, not an official publisher/instructor answer key. Open-ended answers allow multiple defensible approaches; calculation checkpoints state their assumptions. Scope notes identify selected textbook material outside the slides' emphasis.
+## Using Set 2
 
-Textbook answers can be drafted in a textarea and are saved locally in the browser alongside separate self-check marks. No server receives drafts. Chapter selection, shuffle, question navigation and reveal/hide controls are included. Practice progress and textbook progress are independent; the header reset affects practice sets only.
+Choose the **Practice Set 2** tab, then use Practice, Flashcards, Mock exam, Chapter notes, or Progress for that set. It includes chapter/type filters, retry-missed and unattempted filters, immediate explained feedback in practice, a timed mock, flags, question navigation, and chapter results.
 
-The textbook update introduced `textbook-data.js` and `textbook.js`. Upload all twelve files from the latest ZIP, including the two Study Guide Quiz scripts. Existing A/B/C sets, lecture drills, original sample and the PDF guide remain included. Syntax and functional checks cover both question libraries; browser QA verifies the new tab and draft/reveal/navigation flow.
+The mixed mock contains all 100 Set 2 questions in randomized order, with shuffled MCQ options. It defaults to 90 minutes; 80- and 120-minute practice settings are available. MCQ-only practice uses the set’s 72 MCQs. Repeated attempts reuse this bank, not newly generated questions.
 
+## Separate progress; existing work preserved
 
-## Study Guide Quiz tab
+Set 1 retains its original question IDs and browser-storage key. The new Set 2 has its own question IDs and separate storage. Studying or resetting one set does not erase the other set’s answers, flashcards, or exam history.
 
-120 new original multiple-choice questions: 20 per guide unit, in the same chronological order as the PDF. Units map to textbook Chapters 1, 2, 3, 4, 5 and 7. Each question includes five choices, an explanation, and a direct link to the relevant PDF page. Concept distinctions, application scenarios and worked-method numerical questions reflect the guide rather than adding topics from excluded textbook sections.
+Progress persists only in the same browser and origin. Keep the existing website address to retain your old progress. Moving to a different host, clearing browser data, or using private browsing can affect persistence. Browser storage may be restricted for local files.
 
-Choose immediate feedback or feedback at the end. Answers lock after selection; use the question map to reach unanswered questions, then finish for a score and complete answer review. Retry missed questions, shuffle or restart a unit. Each unit’s current attempt and best full-unit score are saved separately in the browser; retries do not replace full-unit bests. The practice reset does not clear guide sessions or textbook drafts. Local-file browser storage support varies; GitHub Pages provides a consistent site origin.
+Each set can preserve its own active mock. Its deadline continues to elapse when you switch pages; an expired saved attempt is submitted when that set is opened again. You can review submitted attempts and retry missed questions within the appropriate set.
 
-To update GitHub, extract the ZIP and upload **all twelve files** into the existing site folder, replacing matching files. In particular, include `study-guide-data.js` and `study-guide-quiz.js` alongside the revised HTML, CSS and textbook tab script. Existing question sets and the PDF remain included. No build step is required.
+## Question coverage and sources
 
-Verification for this addition: checks cover all 120 items, unique options/IDs, 20 per unit, balanced answer positions, chapter mapping, independent arithmetic, three-tab navigation, locked answers, study/exam feedback, completion validation, scoring, retry, shuffle, saved sessions and isolated progress. Existing practice and textbook checks continue to pass.
+Each midterm set has 72 MCQ and 28 true/false questions:
+
+| Chapter | MCQ | True/false | Total |
+| --- | ---: | ---: | ---: |
+| 1 | 12 | 4 | 16 |
+| 2 | 12 | 4 | 16 |
+| 3 | 12 | 6 | 18 |
+| 4 | 12 | 6 | 18 |
+| 5 | 12 | 4 | 16 |
+| 6 | 12 | 4 | 16 |
+| **Total per set** | **72** | **28** | **100** |
+
+Set 2 includes new scenarios and distinctions involving success measures, investment categories, leadership, culture, governance, process mapping, both JWD cases, benefits/assumptions, financial comparisons, requirements techniques, WBS interpretation, dependency types, leads/lags, backward passes, float, compression, and PERT. It reuses core textbook concepts for reinforcement, but no question stem or ID is copied from Set 1.
+
+Primary source: your supplied Schwalbe ninth-edition textbook, Chapters 1–6. Every new answer has an explanation and specific **printed textbook page references**; add 25 for the corresponding page in your supplied PDF viewer. Fictional scenarios and calculations are original teaching examples; named JWD and ResNet cases refer to the textbook. Your professor’s sample PDF informed the concise scenario/definition style.
+
+You confirmed a 100-question MCQ/true-false midterm. The 72/28 mix and chapter distribution here are practice choices; the instructor’s exact split and weights are unknown. These are original study questions, not actual exam questions or guaranteed predictions. The existing final-exam bank was preserved, not reverified in this update.
+
+## Validation
+
+Both banks passed programmatic checks for counts, unique IDs, valid answers, chapter filters, scoring, shuffled option mappings, resume/flags, timeout, history, retry-missed, flashcards, reset isolation, and storage fallback. Set 1’s question data was compared with the previous ZIP and preserved. New financial/network calculations were independently checked, and relative file links and ZIP integrity were verified.
+
+Live browser preview was unavailable under this environment’s restrictions, so real-browser visual layout was not verified in this update.
